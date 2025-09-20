@@ -1,0 +1,125 @@
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;;
+    padding: 2rem;
+  }
+  
+  .login-card {
+    border-radius: 12px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid var(--color-primary);
+  }
+  
+  .login-card h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtitle {
+    text-align: center;
+    display: block;
+    color: var(--color-primary-dark);
+    margin-bottom: 2rem;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    color: var(--color-dark);
+  }
+  
+  .form-control {
+    padding: 0.5rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+  
+  .form-control.error {
+    border-color: var(--color-danger);
+  }
+  
+  .error-message {
+    color: var(--color-danger);
+    margin-top: 0.25rem;
+  }
+  
+  .error-general {
+    color: var(--color-danger);
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-danger);
+    text-align: center;
+  }
+  
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--color-primary-dark);
+  }
+  
+  .btn-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .form-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  .form-footer p {
+    color: var(--color-dark);
+  }
+  
+  .link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .link:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  /* Responsive */
+  @media (max-width: 480px) {
+    .login-container {
+      padding: 1rem;
+    }
+    
+    .login-card {
+      padding: 2rem;
+    }
+  }
