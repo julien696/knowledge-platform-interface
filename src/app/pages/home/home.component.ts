@@ -30,4 +30,18 @@ export class HomeComponent implements OnInit {
       } 
     })
   }
+
+  getThemeImage(themeName : string) : string {
+    const imageMap : { [key :string ] : string } = {
+      'Musique' : '/img/themes/musique.jpg',
+      'Informatique' : '/img/themes/informatique.jpg',
+      'Jardinage' : '/img/themes/jardinage.jpeg',
+      'Cuisine' : '/img/themes/cuisine.jpeg'
+    };
+    return imageMap[themeName]
+  }
+
+  goToTheme(themeId: number): void {
+    console.log('Navigation vers le thème:', themeId);
+  }
 }

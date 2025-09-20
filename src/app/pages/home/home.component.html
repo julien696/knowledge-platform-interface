@@ -1,8 +1,17 @@
-<main>
+<main class="home-container">
     <h1>{{ title }}</h1>
+    <p class="subtitle">Votre parcours vers l'excellence commence ici</p>
     <div class="themes-container">
         <div class="theme-card" *ngFor="let theme of themes">
-            <h2>{{ theme.name }}</h2>
+            <div class="theme-image-container">
+                <img [src]="getThemeImage(theme.name)" [alt]="theme.name" class="theme-image">
+            </div>
+            <div class="theme-content">
+                <h2>{{ theme.name }}</h2>
+                <button class="btn-primary" (click)="goToTheme(theme.id)">
+                    En savoir plus
+                </button>
+            </div>
         </div>
     </div>
 </main>
