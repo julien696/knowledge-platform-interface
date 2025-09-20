@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+
+:root {
+  --color-primary: #0074c7;
+  --color-primary-dark: #00497c;
+  --color-secondary: #82b864;
+  --color-danger: #cd2c2c;
+  --color-dark: #384050;
+  --color-light: #f1f8fc;
+}
+
+.text-primary { color: var(--color-primary); }
+.text-primary-dark { color: var(--color-primary-dark); }
+.text-danger { color: var(--color-danger); }
+.text-dark { color: var(--color-dark); }
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+h1 {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 2.5rem;
+  color: var(--color-primary-dark);
+}
+
+h2 {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 0.8rem;
+}
+
+h3 {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 1.9rem;
+  color: var(--color-primary);
+  margin-bottom: 0.6rem;
+}
+
+
