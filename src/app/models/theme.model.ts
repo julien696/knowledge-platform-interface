@@ -6,7 +6,7 @@ export interface Theme {
     updated_at? : Date;
 }
 
-export interface ApiResponse {
+export interface ThemeApiResponse {
     member: Theme[];
     totalItems: number;
 }

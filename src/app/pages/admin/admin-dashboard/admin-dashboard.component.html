@@ -1,0 +1,136 @@
+<main>
+    <div class="admin-dashboard">
+        <div *ngIf="error" class="error-message">
+            {{ error }}
+        </div>
+        
+        <div *ngIf="success" class="success-message">
+            {{ success }}
+        </div>
+        
+        <h1>Tableau de bord Admin</h1>
+        
+        <section class="table-section">
+            <div class="table-header">
+                <h2>Utilisateurs</h2>
+                <button class="btn-primary" (click)="addUser()">Ajouter un utilisateur</button>
+            </div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <select [(ngModel)]="user.role" (change)="updateUserRole(user)">
+                                <option value="ROLE_USER">Utilisateur</option>
+                                <option value="ROLE_ADMIN">Admin</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn-edit" (click)="editUser(user)">Modifier</button>
+                            <button class="btn-delete" (click)="deleteUser(user)">Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="table-section">
+            <div class="table-header">
+                <h2>Cursus</h2>
+                <button class="btn-primary" (click)="addCursus()">Ajouter un cursus</button>
+            </div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Thème</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cursus of cursus">
+                        <td>{{ cursus.id }}</td>
+                        <td>{{ cursus.name }}</td>
+                        <td>{{ getThemeById(cursus.theme) }}</td>
+                        <td>
+                            <button class="btn-edit" (click)="editCursus(cursus)">Modifier</button>
+                            <button class="btn-delete" (click)="deleteCursus(cursus)">Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="table-section">
+            <div class="table-header">
+                <h2>Leçons</h2>
+                <button class="btn-primary" (click)="addLesson()">Ajouter une leçon</button>
+            </div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Cursus</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let lesson of lessons">
+                        <td>{{ lesson.id }}</td>
+                        <td>{{ lesson.name }}</td>
+                        <td>{{ lesson.cursus?.name || 'Aucun cursus' }}</td>
+                        <td>
+                            <button class="btn-edit" (click)="editLesson(lesson)">Modifier</button>
+                            <button class="btn-delete" (click)="deleteLesson(lesson)">Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="listes-section">
+            <div class="listes-group">
+                <h3>Liste des commandes</h3>
+                <select [(ngModel)]="selectedOrder">
+                    <option value="">Sélectionner une commande</option>
+                    <option *ngFor="let order of orders" [value]="order.id">
+                        Commande #{{ order.id }} - {{ order.user?.name }} - {{ order.amount }}€
+                    </option>
+                </select>
+            </div>
+
+            <div class="listes-group">
+                <h3>Liste des inscriptions aux cursus</h3>
+                <select [(ngModel)]="selectedCursusEnrollment">
+                    <option value="">Sélectionner une inscription</option>
+                    <option *ngFor="let enrollment of cursusEnrollments" [value]="enrollment.id">
+                        {{ enrollment.user?.name }} - {{ enrollment.cursus?.name }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="listes-group">
+                <h3>Liste des inscriptions aux leçons</h3>
+                <select [(ngModel)]="selectedLessonEnrollment">
+                    <option value="">Sélectionner une inscription</option>
+                    <option *ngFor="let enrollment of lessonEnrollments" [value]="enrollment.id">
+                        {{ enrollment.user?.name }} - {{ enrollment.lesson?.name }}
+                    </option>
+                </select>
+            </div>
+        </section>
+    </div>
+</main>

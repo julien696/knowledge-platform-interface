@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Theme, ApiResponse } from '../../models/theme.model';
+import { Theme, ThemeApiResponse } from '../../models/theme.model';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadThemes(): void {
-    this.http.get<ApiResponse>(`${environment.apiUrl}/themes`).subscribe({
+    this.http.get<ThemeApiResponse>(`${environment.apiUrl}/themes`).subscribe({
       next: (response) => {
         this.themes = response.member;
       },

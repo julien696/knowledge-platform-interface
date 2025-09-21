@@ -1,0 +1,110 @@
+<main>
+    <div class="form-container">
+        <div class="form-card">
+            <h1>{{ isEditMode ? 'Modifier la leçon' : 'Créer une leçon' }}</h1>
+            
+            <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()" class="admin-form">
+                
+                <div class="form-group">
+                    <label for="name">Nom de la leçon</label>
+                    <input
+                        type="text"
+                        id="name"
+                        formControlName="name"
+                        class="form-control"
+                        [class.error]="name?.invalid && name?.touched"
+                        placeholder="Nom de la leçon">
+                    
+                    <div *ngIf="name?.invalid && name?.touched" class="error-message">
+                        <span *ngIf="name?.errors?.['required']">Le nom est requis</span>
+                        <span *ngIf="name?.errors?.['minlength']">Minimum 2 caractères</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description de la leçon</label>
+                    <textarea
+                        id="description"
+                        formControlName="description"
+                        class="form-control"
+                        [class.error]="description?.invalid && description?.touched"
+                        placeholder="Décrivez le contenu de cette leçon"
+                        rows="4">
+                        </textarea>
+                    
+                    <div *ngIf="description?.invalid && description?.touched" class="error-message">
+                        <span *ngIf="description?.errors?.['required']">La description est requise</span>
+                        <span *ngIf="description?.errors?.['minlength']">Minimum 10 caractères</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Prix (€)</label>
+                    <input
+                        type="number"
+                        id="price"
+                        formControlName="price"
+                        class="form-control"
+                        [class.error]="price?.invalid && price?.touched"
+                        placeholder="0.00€"
+                        min="0">
+                    
+                    <div *ngIf="price?.invalid && price?.touched" class="error-message">
+                        <span *ngIf="price?.errors?.['required']">Le prix est requis</span>
+                        <span *ngIf="price?.errors?.['min']">Le prix doit être positif</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="videoUrl">URL de la vidéo</label>
+                    <input
+                        type="url"
+                        id="videoUrl"
+                        formControlName="videoUrl"
+                        class="form-control"
+                        [class.error]="videoUrl?.invalid && videoUrl?.touched"
+                        placeholder="https://example.com/video.mp4">
+                    
+                    <div *ngIf="videoUrl?.invalid && videoUrl?.touched" class="error-message">
+                        <span *ngIf="videoUrl?.errors?.['required']">L'URL de la vidéo est requise</span>
+                        <span *ngIf="videoUrl?.errors?.['pattern']">L'URL doit commencer par http:// ou https://</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cursus">Cursus</label>
+                    <select
+                        id="cursus"
+                        formControlName="cursus"
+                        class="form-control">
+                        <option value="">Sélectionner un cursus</option>
+                        <option *ngFor="let cursus of cursusList" [value]="cursus.id">
+                            {{ cursus.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div *ngIf="error" class="error-general">
+                    {{ error }}
+                </div>
+
+                <div class="form-actions">
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                        [disabled]="lessonForm.invalid">
+                        <span *ngIf="isEditMode">{{ isEditMode ? 'Modification...' : 'Création...' }}</span>
+                        <span *ngIf="!isEditMode">{{ isEditMode ? 'Modifier' : 'Créer' }}</span>
+                    </button>
+                    
+                    <button
+                        type="button"
+                        class="btn-secondary"
+                        (click)="router.navigate(['/admin'])">
+                        Annuler
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,176 @@
+.admin-dashboard {
+  padding: 2rem;
+  
+}
+
+.error-message {
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.success-message {
+  border: 1px solid var(--color-success);
+  color: var(--color-success);
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.table-section {
+  margin-bottom: 3rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--color-light);
+  border-bottom: 1px solid var(--color-light);
+}
+
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border: 1px solid var(--color-primary);
+}
+
+.admin-table th {
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+.admin-table tr:hover td {
+  background-color: var(--color-light);
+}
+
+
+.admin-table select {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-light);
+  border-radius: 4px;
+  min-width: 120px;
+}
+
+.admin-table td {
+  vertical-align: middle;
+}
+
+.admin-table .actions-cell {
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-edit {
+  background-color: var(--color-secondary);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: background-color 0.3s;
+  font-size: 0.9rem;
+}
+
+
+.btn-delete {
+  background-color: var(--color-danger);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.listes-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.listes-group {
+  padding: 1.5rem;
+  border-radius: 8px;
+  min-width: 100%;
+}
+
+.listes-group h3 {
+  margin: 0 0 1rem 0;
+}
+
+.listes-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 4px;
+}
+
+.listes-group select:focus {
+  outline: none;
+  border-color: var(--color-primary-dark);
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1rem;
+  }
+
+  .table-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+
+  .admin-table th,
+  .admin-table td {
+    padding: 0.5rem;
+  }
+
+  .listes-section {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .btn-edit,
+  .btn-delete {
+    padding: 0.2rem 0.4rem;
+  }
+}
