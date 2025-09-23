@@ -234,4 +234,8 @@ export class AdminDashboardComponent implements OnInit {
         
         return 'Aucun thème';
     }
+
+    getVideoUrl(videoName: string): string {
+        return `${environment.apiUrl.replace('/api', '')}/uploads/videos/${videoName}`;
+    }
 }

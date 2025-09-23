@@ -33,7 +33,7 @@ export class AdminLessonFormComponent implements OnInit {
             description: ['', [Validators.required, Validators.minLength(10)]],
             price: ['', [Validators.required, Validators.min(0)]],
             videoUrl: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
-            cursus: ['']
+            cursus: ['']  
         });
     }
 
@@ -82,20 +82,21 @@ export class AdminLessonFormComponent implements OnInit {
         }
     }
 
+
     onSubmit(): void {
         if (this.lessonForm.valid) {
             this.error = null;
 
-            const formData = this.lessonForm.value;
-            
-            if (formData.cursus) {
-                formData.cursus = `/api/cursus/${formData.cursus}`;
-            } else {
-                delete formData.cursus;
-            }
+            const lessonData = {
+                name: this.lessonForm.value.name,
+                description: this.lessonForm.value.description,
+                price: this.lessonForm.value.price,
+                videoUrl: this.lessonForm.value.videoUrl,
+                cursus: this.lessonForm.value.cursus ? `/api/cursus/${this.lessonForm.value.cursus}` : null
+            };
 
             if (this.isEditMode) {
-                this.http.put(`${environment.apiUrl}/lesson/${this.lessonId}`, formData, {
+                this.http.put(`${environment.apiUrl}/lesson/${this.lessonId}`, lessonData, {
                     headers: {
                         'Content-Type': 'application/ld+json'
                     }
@@ -108,7 +109,7 @@ export class AdminLessonFormComponent implements OnInit {
                     }
                 });
             } else {
-                this.http.post(`${environment.apiUrl}/lesson`, formData, {
+                this.http.post(`${environment.apiUrl}/lesson`, lessonData, {
                     headers: {
                         'Content-Type': 'application/ld+json'
                     }

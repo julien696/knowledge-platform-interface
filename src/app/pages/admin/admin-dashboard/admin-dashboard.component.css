@@ -144,6 +144,20 @@
   border-color: var(--color-primary-dark);
 }
 
+.cursus-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.lesson-video {
+  width: 100px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
 @media (max-width: 768px) {
   .admin-dashboard {
     padding: 1rem;
