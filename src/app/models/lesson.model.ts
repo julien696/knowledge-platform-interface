@@ -6,6 +6,8 @@ export interface Lesson {
   description?: string;
   price?: number;
   videoUrl?: string;
+  videoFile?: File;        
+  videoName?: string;     
   cursus?: any; 
   created_by?: User; 
   updated_by?: User; 

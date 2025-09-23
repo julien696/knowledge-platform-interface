@@ -84,6 +84,7 @@
                         <th>ID</th>
                         <th>Nom</th>
                         <th>Cursus</th>
+                        <th>Vidéo</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -92,6 +93,15 @@
                         <td>{{ lesson.id }}</td>
                         <td>{{ lesson.name }}</td>
                         <td>{{ lesson.cursus?.name || 'Aucun cursus' }}</td>
+                        <td>
+                            <video *ngIf="lesson.videoName" 
+                                   [src]="getVideoUrl(lesson.videoName)" 
+                                   controls 
+                                   class="lesson-video">
+                                Votre navigateur ne supporte pas la lecture vidéo.
+                            </video>
+                            <span *ngIf="!lesson.videoName">Aucune vidéo</span>
+                        </td>
                         <td>
                             <button class="btn-edit" (click)="editLesson(lesson)">Modifier</button>
                             <button class="btn-delete" (click)="deleteLesson(lesson)">Supprimer</button>
