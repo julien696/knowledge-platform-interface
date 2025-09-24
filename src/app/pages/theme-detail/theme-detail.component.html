@@ -1,0 +1,42 @@
+<main class="container" *ngIf="!error && theme">
+    <div class="theme-header">
+        <h1>{{ theme.name }}</h1>
+        <img [src]="getThemeImage()" [alt]="theme.name" class="theme-image">
+    </div>
+
+    <section class="cursus-section" *ngIf="cursus.length > 0">
+        <h2>Cursus disponibles</h2>
+        <div class="cursus-list">
+            <div class="cursus-card" *ngFor="let cursus of cursus">
+                <div class="cursus-info">
+                    <h3>{{ cursus.name }}</h3>
+                    <span class="price">{{ cursus.price }}€</span>
+                </div>
+                
+                <button class="btn-buy-cursus" (click)="buyCursus(cursus)">
+                    Acheter le cursus complet
+                </button>
+
+                <div class="lessons-section" *ngIf="cursus.lessons && cursus.lessons.length > 0">
+                    <h3>Leçons incluses :</h3>
+                    <div class="lessons-list">
+                        <div class="lesson-item" *ngFor="let lesson of cursus.lessons">
+                            <div class="lesson-info">
+                                <h4>{{ lesson.name }}</h4>
+                                <span class="price">{{ lesson.price }}€</span>
+                            </div>
+                            <button class="btn-buy-lesson" (click)="buyLesson(lesson)">
+                                Acheter cette leçon
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="error" *ngIf="error">
+        <p>{{ error }}</p>
+        <button routerLink="/">Retour à l'accueil</button>
+    </div>
+</main>

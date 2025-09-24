@@ -83,6 +83,13 @@ export class AdminLessonFormComponent implements OnInit {
     }
 
 
+    onVideoFileChange(event: any): void {
+        const file = event.target.files[0];
+        if (file) {
+            console.log('Fichier vidéo sélectionné:', file.name);
+        }
+    }
+
     onSubmit(): void {
         if (this.lessonForm.valid) {
             this.error = null;
