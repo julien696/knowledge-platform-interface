@@ -24,4 +24,5 @@ export const routes: Routes = [
     { path: 'admin/lessons/create', component: AdminLessonFormComponent },
     { path: 'admin/lessons/:id/edit', component: AdminLessonFormComponent },
     { path: 'theme/:id', component: ThemeDetailComponent },
+    { path: 'payment/success', component: HomeComponent },
 ];
