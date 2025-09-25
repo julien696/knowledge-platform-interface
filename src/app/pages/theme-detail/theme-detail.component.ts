@@ -84,7 +84,7 @@ export class ThemeDetailComponent implements OnInit {
                     })
                 },
                 error: (error) => {
-                    this.error = 'Erreur lors de la création de la commande';
+                    this.handleOrderError(error);
                 }
             });
         });
@@ -118,10 +118,24 @@ export class ThemeDetailComponent implements OnInit {
                     });
                 },
                 error: (error) => {
-                    this.error = 'Erreur lors de la création de la commande';
+                    this.handleOrderError(error);
                 }
             });
         });
+    }
+
+    private handleOrderError(error: any): void {
+        console.error('Erreur commande:', error);
+        
+        const errorMessage = error?.error?.error || error?.error?.detail || 'Erreur lors de la création de la commande';
+        
+        this.error = errorMessage;
+        
+        alert(errorMessage);
+        
+        setTimeout(() => {
+            this.router.navigate(['/']);
+        }, 2000);
     }
 }
 

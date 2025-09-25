@@ -5,6 +5,8 @@ export interface OrderItem {
     orderId?: any; 
     lesson?: any; 
     cursus?: any; 
+    productName?: string;
+    productType?: string;
     created_at?: string;
     updated_at?: string;
   }
