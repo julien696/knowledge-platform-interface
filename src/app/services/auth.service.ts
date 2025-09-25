@@ -16,6 +16,7 @@ export interface MeResponse {
     enrollmentLessons: any[];
     themes: any[];
     certifications: any[];
+    verified: boolean;
 }
 
 @Injectable({
@@ -24,11 +25,14 @@ export interface MeResponse {
 export class AuthService {
     private currentUserSubject = new BehaviorSubject<any>(null);
     public currentUser$ = this.currentUserSubject.asObservable();
+    public error: string | null = null;
 
     constructor(
         private http: HttpClient,
         private router: Router
-    ) {}
+    ) {
+        this.initializeUser();
+    }
 
     checkAdminRole(): Promise<boolean> {
         return new Promise((resolve, reject) => {
@@ -105,6 +109,51 @@ export class AuthService {
 
     getCurrentUser(): any {
         return this.currentUserSubject.value;
+    }
+
+    loadCurrentUser(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            const token = this.getToken();
+            if (!token) {
+                resolve(null);
+                return;
+            }
+
+            this.http.get<MeResponse>(`${environment.apiUrl}/me`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).subscribe({
+                next: (response) => {
+                    this.currentUserSubject.next(response.user);
+                    resolve(response);
+                },
+                error: (error) => {
+                    this.error = 'Erreur chargement utilisateur';
+                    this.logout();
+                    resolve(null);
+                }
+            });
+        });
+    }
+
+    canPurchaseAsync(): Promise<boolean> {
+        return new Promise((resolve) => {
+            if (!this.isAuthenticated()) {
+                resolve(false);
+                return;
+            }
+
+            this.loadCurrentUser().then((response) => {
+                resolve(response?.verified === true);
+            });
+        });
+    }
+
+    initializeUser(): void {
+        if (this.isAuthenticated()) {
+            this.loadCurrentUser();
+        }
     }
 
 }

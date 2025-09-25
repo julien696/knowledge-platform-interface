@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Theme, ThemeApiResponse } from '../../models/theme.model';
+import { AuthService } from '../../services/auth.service';
+import { PaymentService } from '../../services/payment.service';
 
 @Component({
     selector: 'app-home',
@@ -17,11 +19,18 @@ export class HomeComponent implements OnInit {
 
     constructor(
         private http: HttpClient,
-        private router: Router
+        private router: Router,
+        private authService: AuthService,
+        private paymentService: PaymentService
     ) {}
 
     ngOnInit(): void {
         this.loadThemes();
+        
+        // Vérifier si on revient d'un paiement réussi
+        if (this.router.url.includes('/payment/success')) {
+            this.handlePaymentSuccess();
+        }
     }
 
     loadThemes(): void {
@@ -45,5 +54,22 @@ export class HomeComponent implements OnInit {
 
     goToTheme(themeId: number): void {
         this.router.navigate(['/theme', themeId]);
+    }
+
+    handlePaymentSuccess(): void {
+        const lastOrderId = localStorage.getItem('lastOrderId');
+        
+        if (lastOrderId) {
+            this.paymentService.confirmPayment(parseInt(lastOrderId)).subscribe({
+                next: (response) => {
+                    this.authService.loadCurrentUser();
+                },
+                error: (error) => {
+                    this.authService.loadCurrentUser();
+                }
+            });
+            
+            localStorage.removeItem('lastOrderId');
+        }
     }
 }

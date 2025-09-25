@@ -1,7 +1,11 @@
 import { User } from './user.model';
+import { OrderItem } from './order-item.model';
 
 export interface Order {
-  id: number;
+  '@id'?: string;
+  '@type'?: string;
+  '@context'?: string;
+  id?: number;
   date: string; 
   status: string; 
   stripeOrderId?: string; 
@@ -12,13 +16,4 @@ export interface Order {
   updated_at?: string;
 }
 
-export interface OrderItem {
-  id: number;
-  price: number; 
-  orderId?: any; 
-  lesson?: any; 
-  cursus?: any; 
-  created_at?: string;
-  updated_at?: string;
-}
 

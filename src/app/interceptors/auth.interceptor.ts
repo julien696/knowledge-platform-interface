@@ -1,18 +1,23 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-    const authService = inject(AuthService);
-    
-    const token = authService.getToken();
+    const token = localStorage.getItem('knowledge_platform_token');
 
-    if (token && authService.isAuthenticated() && req.url.includes('/api/')) {
-        const authRequest = req.clone({
-            headers: req.headers.set('Authorization', `Bearer ${token}`)
-        });
-
-        return next(authRequest);
+    if (token && req.url.includes('/api/')) {
+        // Vérifier si le token n'est pas expiré
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            const currentTime = Date.now() / 1000;
+            
+            if (payload.exp && payload.exp >= currentTime) {
+                const authRequest = req.clone({
+                    headers: req.headers.set('Authorization', `Bearer ${token}`)
+                });
+                return next(authRequest);
+            }
+        } catch (error) {
+            // Token invalide, on continue sans l'ajouter
+        }
     }
 
     return next(req);
