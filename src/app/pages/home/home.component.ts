@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Theme, ThemeApiResponse } from '../../models/theme.model';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 import { PaymentService } from '../../services/payment.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
         private http: HttpClient,
         private router: Router,
         private authService: AuthService,
-        private paymentService: PaymentService
+        private paymentService: PaymentService,
+        private userService: UserService
     ) {}
 
     ngOnInit(): void {
@@ -62,10 +64,10 @@ export class HomeComponent implements OnInit {
         if (lastOrderId) {
             this.paymentService.confirmPayment(parseInt(lastOrderId)).subscribe({
                 next: (response) => {
-                    this.authService.loadCurrentUser();
+                    this.userService.loadCurrentUser();
                 },
                 error: (error) => {
-                    this.authService.loadCurrentUser();
+                    this.userService.loadCurrentUser();
                 }
             });
             

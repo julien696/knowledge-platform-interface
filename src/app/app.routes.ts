@@ -9,6 +9,7 @@ import { AdminUserFormComponent } from './pages/admin/admin-user-form/admin-user
 import { AdminCursusFormComponent } from './pages/admin/admin-cursus-form/admin-cursus-form.component';
 import { AdminLessonFormComponent } from './pages/admin/admin-lesson-form/admin-lesson-form.component';
 import { ThemeDetailComponent } from './pages/theme-detail/theme-detail.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -25,4 +26,5 @@ export const routes: Routes = [
     { path: 'admin/lessons/:id/edit', component: AdminLessonFormComponent },
     { path: 'theme/:id', component: ThemeDetailComponent },
     { path: 'payment/success', component: HomeComponent },
+    { path: 'profile', component: ProfileComponent }, // Protection gérée dans le composant
 ];

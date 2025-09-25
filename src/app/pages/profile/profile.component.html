@@ -1,0 +1,88 @@
+<main class="container">
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Mon Profil</h1>
+        </div>
+
+        <section class="profile-section" *ngIf="user">
+            <h2>Informations personnelles</h2>
+            <div class="user-info">
+                <div class="info-item">
+                    <label>Nom :</label>
+                    <span>{{ user.name }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Email :</label>
+                    <span>{{ user.email }}</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <h2>Historique des commandes</h2>
+            <div *ngIf="orders.length > 0; else noOrders">
+                <div class="order-item" *ngFor="let order of orders">
+                    <div class="order-info">
+                        <span class="order-date">{{ formatDate(order.date) }}</span>
+                        <span class="order-amount">{{ order.amount | number:'1.2-2' }}€</span>
+                        <span class="order-status" [class]="order.status">{{ order.status }}</span>
+                    </div>
+                
+                    <div class="order-items" *ngIf="order.orderItems && order.orderItems.length > 0">
+                        <h4>Articles commandés :</h4>
+                        <ul>
+                            <li *ngFor="let item of order.orderItems">
+                                <span class="item-name">{{ item.productName || item.cursus?.name || item.lesson?.name || 'Produit' }}</span>
+                                <span class="item-type">({{ item.productType || (item.cursus ? 'cursus' : 'lesson') }})</span>
+                                <span class="item-price">{{ item.price | number:'1.2-2' }}€</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ng-template #noOrders>
+                <p class="no-data">Aucune commande trouvée</p>
+            </ng-template>
+        </section>
+
+        <section class="profile-section" *ngIf="enrollmentsCursuses.length > 0">
+            <h2>Mes Cursus</h2>
+            <div class="courses-list">
+                <div class="course-card" *ngFor="let cursus of enrollmentsCursuses">
+                    <h3>{{ cursus.cursus?.name || cursus.cursusName || 'Cursus' }}</h3>
+                    <span *ngIf="cursus.isValidated" class="validated">✅ Validé</span>
+                    <span *ngIf="!cursus.isValidated" class="pending">⏳ formation en cours</span>
+                    <button class="btn-access" (click)="goToCursus(cursus.cursus?.id)">
+                        Accéder au cours
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section" *ngIf="enrollmentsLessons.length > 0">
+            <h2>Mes Leçons</h2>
+            <div class="courses-grid">
+                <div class="course-card" *ngFor="let lesson of enrollmentsLessons">
+                    <h3>{{ lesson.lesson?.name || 'Leçon' }}</h3>
+                    <span *ngIf="lesson.isValidated" class="validated">✅ Validé</span>
+                    <span *ngIf="!lesson.isValidated" class="pending">⏳ formation en cours</span>
+                    <button class="btn-access" (click)="goToLesson(lesson.lesson?.id)">
+                        Accéder à la leçon
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section" *ngIf="enrollmentsCursuses.length === 0 && enrollmentsLessons.length === 0">
+            <h2>Mes Cours</h2>
+            <span class="no-data">Vous n'avez pas encore acheté de cours.</span>
+            <button class="btn-access" routerLink="/">
+                Découvrir nos cours
+            </button>
+        </section>
+
+        <div class="error-message" *ngIf="error">
+            <p>{{ error }}</p>
+        </div>
+    </div>
+</main>
