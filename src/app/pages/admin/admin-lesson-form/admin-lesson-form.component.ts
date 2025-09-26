@@ -32,7 +32,7 @@ export class AdminLessonFormComponent implements OnInit {
             name: ['', [Validators.required, Validators.minLength(2)]],
             description: ['', [Validators.required, Validators.minLength(10)]],
             price: ['', [Validators.required, Validators.min(0)]],
-            videoUrl: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
+            videoUrl: [''],
             cursus: ['']  
         });
     }
@@ -107,7 +107,7 @@ export class AdminLessonFormComponent implements OnInit {
                         'Content-Type': 'application/ld+json'
                     }
                 }).subscribe({
-                    next: () => {
+                    next: (response) => {
                         this.router.navigate(['/admin']);
                     },
                     error: (error) => {
@@ -120,7 +120,7 @@ export class AdminLessonFormComponent implements OnInit {
                         'Content-Type': 'application/ld+json'
                     }
                 }).subscribe({
-                    next: () => {
+                    next: (response) => {
                         this.router.navigate(['/admin']);
                     },
                     error: (error) => {

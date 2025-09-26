@@ -55,7 +55,7 @@ export class AdminCursusFormComponent implements OnInit {
                 this.themes = response.member || response;
             },
             error: (error) => {
-                console.error('Erreur chargement thèmes:', error);
+                this.error = 'Erreur lors du chargement des thèmes';
             }
         });
     }
@@ -95,7 +95,7 @@ export class AdminCursusFormComponent implements OnInit {
                         'Content-Type': 'application/ld+json'
                     }
                 }).subscribe({
-                    next: () => {
+                    next: (response) => {
                         this.router.navigate(['/admin']);
                     },
                     error: (error) => {
@@ -108,7 +108,7 @@ export class AdminCursusFormComponent implements OnInit {
                         'Content-Type': 'application/ld+json'
                     }
                 }).subscribe({
-                    next: () => {
+                    next: (response) => {
                         this.router.navigate(['/admin']);
                     },
                     error: (error) => {

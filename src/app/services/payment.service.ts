@@ -63,6 +63,7 @@ export class PaymentService {
 
     confirmPayment(orderId: number): Observable<Order> {
         return this.http.post<Order>(`${this.apiUrl}/orders/${orderId}/confirm-payment`, {});
+        
     }
 
     checkLessonAccess(lessonId: number): Observable<AccessCheckResponse> {

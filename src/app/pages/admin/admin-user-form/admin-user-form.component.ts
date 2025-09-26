@@ -29,14 +29,17 @@ export class AdminUserFormComponent implements OnInit {
         this.userForm = this.fb.group({
             name: ['', [Validators.required, Validators.minLength(2)]],
             email: ['', [Validators.required, Validators.email]],
-            role: ['ROLE_USER', [Validators.required]],
+            role: ['user', [Validators.required]],
             plainPassword: ['', [Validators.minLength(6)]]
         });
     }
 
     async ngOnInit(): Promise<void> {
         const isAdmin = await this.authService.checkAdminRole();
-        if (!isAdmin) return;
+        if (!isAdmin) {
+            this.router.navigate(['/']);
+            return;
+        }
 
         this.route.params.subscribe(params => {
             if (params['id']) {
@@ -88,12 +91,14 @@ export class AdminUserFormComponent implements OnInit {
                     }
                 });
             } else {
+                const token = localStorage.getItem('knowledge_platform_token');
                 this.http.post(`${environment.apiUrl}/admin/users`, formData, {
                     headers: {
-                        'Content-Type': 'application/ld+json'
+                        'Content-Type': 'application/ld+json',
+                        'Authorization': `Bearer ${token}`
                     }
                 }).subscribe({
-                    next: () => {
+                    next: (response) => {
                         this.router.navigate(['/admin']);
                     },
                     error: (error) => {

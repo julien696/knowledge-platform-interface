@@ -56,19 +56,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="videoUrl">URL de la vidéo</label>
+                    <label for="videoUrl">URL de la vidéo (optionnel)</label>
                     <input
                         type="url"
                         id="videoUrl"
                         formControlName="videoUrl"
                         class="form-control"
-                        [class.error]="videoUrl?.invalid && videoUrl?.touched"
                         placeholder="https://example.com/video.mp4">
-                    
-                    <div *ngIf="videoUrl?.invalid && videoUrl?.touched" class="error-message">
-                        <span *ngIf="videoUrl?.errors?.['required']">L'URL de la vidéo est requise</span>
-                        <span *ngIf="videoUrl?.errors?.['pattern']">L'URL doit commencer par http:// ou https://</span>
-                    </div>
                 </div>
 
                 <div class="form-group">

@@ -1,0 +1,22 @@
+<main class="lesson-container">
+    <div class="back-button">
+        <button (click)="goToProfil()" class="btn-back">
+            ← Retour au profil
+        </button>
+    </div>
+    <h1>{{ lesson?.name }}</h1>
+    
+    <section class="description">
+        <p>{{ lesson?.description }}</p>
+    </section>
+    
+    <section class="video">
+        <video controls *ngIf="lesson?.videoUrl">
+            <source [src]="getVideoUrl(lesson?.videoUrl)" type="video/mp4">
+        </video>
+    </section>
+    
+    <button (click)="validateLesson()" class="btn-validate">
+       Valider
+    </button>
+</main>
