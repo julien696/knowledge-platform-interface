@@ -12,6 +12,7 @@ import { ThemeDetailComponent } from './pages/theme-detail/theme-detail.componen
 import { ProfilComponent } from './pages/profil/profil.component';
 import { CursusDetailComponent } from './pages/cursus-detail/cursus-detail.component';
 import { LessonDetailComponent } from './pages/lesson-detail/lesson-detail.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -30,5 +31,7 @@ export const routes: Routes = [
     { path: 'payment/success', component: HomeComponent },
     { path: 'profil', component: ProfilComponent },
     { path: 'cursus/:id', component : CursusDetailComponent },
-    { path: 'lesson/:id', component : LessonDetailComponent }
+    { path: 'lesson/:id', component : LessonDetailComponent },
+    { path: 'error', component: ErrorComponent },
+    { path: '**', redirectTo: '/error' }
 ];

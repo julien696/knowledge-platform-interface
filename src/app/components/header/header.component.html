@@ -1,0 +1,20 @@
+<header>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a routerLink="/" class="logo">
+                <img src="/img/logo/knowledge.logo.jpg" alt="Knowledge Platform Logo" class="logo-img" />
+            </a>
+        </div>
+
+        <div class="navbar-menu" *ngIf="!isAuthenticated">
+            <a routerLink="/register" class="nav-link">S'inscrire</a>
+            <a routerLink="/login" class="nav-link">Se connecter</a>
+        </div>
+
+        <div class="navbar-menu" *ngIf="isAuthenticated">
+            <a routerLink="/profil" class="nav-link">Mon profil</a>
+            <a (click)="goToThemes()" class="nav-link">Thèmes</a>
+            <a (click)="logout()" class="nav-link">Se déconnecter</a>
+        </div>
+    </nav>
+</header>
