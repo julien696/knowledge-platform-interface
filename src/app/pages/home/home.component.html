@@ -1,7 +1,7 @@
 <main class="home-container">
     <h1>{{ title }}</h1>
-    <p class="subtitle">Votre parcours vers l'excellence commence ici</p>
-    <div class="themes-container">
+    <span class="subtitle">Votre parcours vers l'excellence commence ici</span>
+    <section id="themes" class="themes-container">
         <div class="theme-card" *ngFor="let theme of themes">
             <div class="theme-image-container">
                 <img [src]="getThemeImage(theme)" [alt]="theme.name" class="theme-image">
@@ -13,5 +13,5 @@
                 </button>
             </div>
         </div>
-    </div>
+    </section>
 </main>
