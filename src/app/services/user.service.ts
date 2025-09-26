@@ -71,4 +71,26 @@ export class UserService {
     initializeUser(): void {   
         this.loadCurrentUser();
     }
+
+    hasAccessToLesson(lessonId: number): boolean {
+        const user = this.getCurrentUser();
+        if(!user) return false;
+
+        return user.enrollmentLessons?.some((enrollment: any) => {
+            return enrollment.lessonId === lessonId || 
+                   enrollment.lesson?.id === lessonId ||
+                   (enrollment.lesson && enrollment.lesson['@id'] && 
+                    enrollment.lesson['@id'].includes(`/lesson/${lessonId}`));
+        }) || false;
+    }
+
+    hasAccessToCursus(cursusId: number): boolean {
+        const user = this.getCurrentUser();
+        if (!user) return false;
+
+        return user.enrollmentCursuses?.some((enrollment : any) => {
+            return enrollment.cursusId === cursusId;
+        }) || false;
+    }
+
 }

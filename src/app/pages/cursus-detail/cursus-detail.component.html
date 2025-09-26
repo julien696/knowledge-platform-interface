@@ -1,0 +1,33 @@
+<main class="cursus-container">
+    <div class="back-button">
+        <button (click)="goToPurchase()" class="btn-back">
+            ← Retour au profil
+        </button>
+    </div>
+    <h1>{{ cursus?.name }}</h1>
+    
+    <section class="current-lesson" *ngIf="currentLesson">
+        <h2>{{ currentLesson.name }}</h2>
+        <p>{{ currentLesson.description }}</p>
+        
+        <video controls *ngIf="currentLesson.videoUrl">
+            <source [src]="getVideoUrl(currentLesson.videoUrl)" type="video/mp4">
+        </video>
+    </section>
+    
+    <section class="navigation" *ngIf="cursus?.lessons">
+        <button (click)="goToPreviousLesson()" [disabled]="currentLessonIndex === 0">
+            Leçon précédente
+        </button>
+        
+        <span>{{ currentLessonIndex + 1 }} / {{ cursus?.lessons?.length || 0 }}</span>
+        
+        <button (click)="goToNextLesson()" [disabled]="currentLessonIndex === (cursus?.lessons?.length || 0) - 1">
+            Leçon suivante
+        </button>
+    </section>
+    
+    <button (click)="validateLesson()" [disabled]="isValidationInProgress" class="btn-validate" *ngIf="currentLesson">
+        {{ isValidationInProgress ? 'Validation...' : 'Valider cette leçon' }}
+    </button>
+</main>

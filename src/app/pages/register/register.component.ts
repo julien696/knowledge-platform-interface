@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { RegisterRequest, RegisterResponse } from '../../models/user.model';
 
 @Component({
     selector: 'app-register',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, RouterModule],
     templateUrl: './register.component.html',
     styleUrl: './register.component.css'
 })
@@ -36,7 +36,6 @@ export class RegisterComponent implements OnInit {
 
     onSubmit(): void {
         if (this.registerForm.valid) {
-
             const formData : RegisterRequest = this.registerForm.value;
 
             this.http.post<RegisterResponse>(`${environment.apiUrl}/register`, formData, {
@@ -48,7 +47,6 @@ export class RegisterComponent implements OnInit {
                     this.router.navigate(['/register-success']);
                 },
                 error : (error) => {
-                    console.error('Erreur d\'inscription', error);
                 }
             });
         }

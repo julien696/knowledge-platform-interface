@@ -8,12 +8,12 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-profil',
   imports: [CommonModule, RouterModule],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  templateUrl: './profil.component.html',
+  styleUrl: './profil.component.css'
 })
-export class ProfileComponent implements OnInit {
+export class ProfilComponent implements OnInit {
   user: User | null = null;
   orders: Order[] = []; 
   enrollmentsCursuses: any[] = [];
@@ -33,6 +33,8 @@ export class ProfileComponent implements OnInit {
     }
 
     this.loadUserData();
+    
+    this.userService.loadCurrentUser();
   }
 
   loadUserData(): void {
@@ -58,20 +60,29 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  loadUserEnrollments(response: any): void {
-    this.enrollmentsCursuses = response.enrollmentCursuses || [];
-    this.enrollmentsLessons = response.enrollmentLessons || [];
-  }
+    loadUserEnrollments(response: any): void {
+        this.enrollmentsCursuses = response.enrollmentCursuses || [];
+        
+        const allLessons = response.enrollmentLessons || [];
+        this.enrollmentsLessons = allLessons.filter((enrollment: any) => {
+            return !enrollment.lesson?.cursus;
+        });
+    }
 
   formatDate(dateString: string): string {
     return new Date(dateString).toLocaleDateString('fr-FR');
   }
 
   goToCursus(cursusId: number): void {
-    this.router.navigate(['/cursus', cursusId]);
+    if (cursusId) {
+      this.router.navigate(['/cursus', cursusId]);
+    }
   }
 
   goToLesson(lessonId: number): void {
-    this.router.navigate(['/lesson', lessonId]);
+    if (lessonId) {
+      this.router.navigate(['/lesson', lessonId]);
+    }
   }
+
 }

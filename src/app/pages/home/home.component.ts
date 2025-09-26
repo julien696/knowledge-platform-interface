@@ -28,10 +28,10 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         this.loadThemes();
-        
-        // Vérifier si on revient d'un paiement réussi
+
         if (this.router.url.includes('/payment/success')) {
             this.handlePaymentSuccess();
+            this.router.navigate(['/'], { replaceUrl: true });
         }
     }
 
@@ -63,15 +63,15 @@ export class HomeComponent implements OnInit {
         
         if (lastOrderId) {
             this.paymentService.confirmPayment(parseInt(lastOrderId)).subscribe({
-                next: (response) => {
+                next: () => {
                     this.userService.loadCurrentUser();
+                    alert('Paiement confirmé ! Regardez votre profil pour accéder à vos cours.');
                 },
-                error: (error) => {
+                error: () => {
                     this.userService.loadCurrentUser();
+                    alert('Paiement confirmé ! Regardez votre profil pour accéder à vos cours.');
                 }
             });
-            
-            localStorage.removeItem('lastOrderId');
         }
     }
 }

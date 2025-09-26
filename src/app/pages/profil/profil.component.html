@@ -49,10 +49,10 @@
             <h2>Mes Cursus</h2>
             <div class="courses-list">
                 <div class="course-card" *ngFor="let cursus of enrollmentsCursuses">
-                    <h3>{{ cursus.cursus?.name || cursus.cursusName || 'Cursus' }}</h3>
-                    <span *ngIf="cursus.isValidated" class="validated">✅ Validé</span>
-                    <span *ngIf="!cursus.isValidated" class="pending">⏳ formation en cours</span>
-                    <button class="btn-access" (click)="goToCursus(cursus.cursus?.id)">
+                    <h3>{{ cursus.cursusName || cursus.cursus?.name || 'Cursus' }}</h3>
+                    <span *ngIf="cursus.validatedAt" class="validated">✅ Cursus validé</span>
+                    <span *ngIf="!cursus.validatedAt" class="pending">⏳ Cursus en cours</span>
+                    <button class="btn-access" (click)="goToCursus(cursus.cursusId)">
                         Accéder au cours
                     </button>
                 </div>
@@ -63,10 +63,10 @@
             <h2>Mes Leçons</h2>
             <div class="courses-grid">
                 <div class="course-card" *ngFor="let lesson of enrollmentsLessons">
-                    <h3>{{ lesson.lesson?.name || 'Leçon' }}</h3>
-                    <span *ngIf="lesson.isValidated" class="validated">✅ Validé</span>
-                    <span *ngIf="!lesson.isValidated" class="pending">⏳ formation en cours</span>
-                    <button class="btn-access" (click)="goToLesson(lesson.lesson?.id)">
+                    <h3>{{ lesson.lessonName || lesson.lesson?.name || 'Leçon' }}</h3>
+                    <span *ngIf="lesson.validatedAt" class="validated">✅ Validé</span>
+                    <span *ngIf="!lesson.validatedAt" class="pending">⏳ formation en cours</span>
+                    <button class="btn-access" (click)="goToLesson(lesson.lessonId)">
                         Accéder à la leçon
                     </button>
                 </div>
