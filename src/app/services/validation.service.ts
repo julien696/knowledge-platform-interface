@@ -44,11 +44,9 @@ export class ValidationService {
             this.validateLesson(lessonId).subscribe({
                 next: (response) => {
                     alert('Leçon validée !');
-                    // Recharger les données utilisateur
                     this.userService.loadCurrentUser().then(() => {
                         if (currentIndex === totalLessons - 1) {
                             alert('Cursus terminé !');
-                            // Forcer le rechargement de la page profil
                             setTimeout(() => {
                                 window.location.href = '/profil';
                             }, 1000);

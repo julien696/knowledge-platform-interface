@@ -14,3 +14,8 @@ export class ErrorComponent {
     window.location.href = '/';
   }
 }
+
+
+
+
+

@@ -19,7 +19,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'register-success', component: RegisterSuccessComponent },
-    { path: 'confirm-account', component: ConfirmationAccountComponent },
+    { path: 'confirm/:token', component: ConfirmationAccountComponent },
     { path: 'admin', component: AdminDashboardComponent },
     { path: 'admin/users/create', component: AdminUserFormComponent },
     { path: 'admin/users/:id/edit', component: AdminUserFormComponent },
