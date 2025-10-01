@@ -46,13 +46,11 @@ export class CursusDetailComponent implements OnInit {
     }
 
     loadCursus(cursusId: number): void {
-        // Charger d'abord les infos du cursus
         this.http.get(`${environment.apiUrl}/cursus/${cursusId}`).subscribe({
             next: (cursus: any) => {
                 this.cursus = cursus;
                 this.hasAccess = this.userService.hasAccessToCursus(cursusId);
                 
-                // Si on a accès, charger le contenu complet
                 if (this.hasAccess) {
                     this.loadCursusContent(cursusId);
                 }
